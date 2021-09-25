@@ -1,18 +1,31 @@
 package bo.edu.ucb.est.Modelo;
 
+import bo.edu.ucb.est.utilidades.Mensaje;
+
 import java.util.HashMap;
 
 
 //Cliente extiende de la clase Usuario
 public class Cliente extends Usuario{
     private String pin;
-    //private Map<String,Cuenta> cuentas;
-    private HashMap<String,Cuenta> cuentas;
 
-    public Cliente(String telegramId, String name, String pin) {
-        super(telegramId, name);
+    private HashMap<String,Cuenta> cuentas;
+    private String idCliente;
+    private static int indice = 10000;
+
+    public Cliente(String idTelegram, String name, String pin) {
+        super(idTelegram, name);
+        idCliente = "IDC"+(indice++);
         this.pin = pin;
         this.cuentas = new HashMap<>();
+    }
+
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getPin() {
@@ -40,14 +53,33 @@ public class Cliente extends Usuario{
 
 
     public void agregarCuenta(Cuenta cuenta){
-        System.out.println(cuenta.getNumero());
-
         cuentas.put(cuenta.getNumero(),cuenta);
     }
 
+    public Mensaje busquedaCuentaId(String idCuenta){
+
+        Cuenta cuentaActual = cuentas.get(idCuenta);
+        Mensaje m = new Mensaje();
+        if(cuentaActual != null){
+                m.setEstado("OK");
+                m.setEntidad(cuentaActual);
+                return m;
+        }
+        else{
+            m.setEstado("NOK");
+            m.setMensaje("Cuenta no encontrada.");
+            return m;
+        }
+
+    }
 
 
-
-
-
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "pin='" + pin + '\'' +
+                ", cuentas=" + cuentas +
+                ", idCliente='" + idCliente + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,8 @@
 package bo.edu.ucb.est.Modelo;
 
+import bo.edu.ucb.est.utilidades.Mensaje;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Banco {
@@ -12,11 +13,11 @@ public class Banco {
     private HashMap <String,Cliente> clientes;
 
     /**
-     * Métdo para agragar clientes en un banco
+     * Métdo para agragar clientes en un banco dentro del mapa de tipo cliente
      * @return
      */
-    public void agrgarCliente(Cliente cliente){
-        this.clientes.put(cliente.getTelegramId(),cliente);
+    public void agregarCliente(Cliente cliente){
+        this.clientes.put(cliente.getIdCliente(),cliente);
     }
 
     public Banco(String nombre, String sigla, String nit, String direccion) {
@@ -67,14 +68,41 @@ public class Banco {
         this.clientes = clientes;
     }
 
-    public Cliente busquedaClienteId(String idCliente, String pin){
+    public Mensaje busquedaClienteId(String idCliente, String pin){
         Cliente clienteActual = clientes.get(idCliente); //Se obtiene el cliente mediante el id de telegram
-        if(clienteActual.getPin() == pin){
-            return clienteActual;
+        Mensaje m = new Mensaje();
+        if(clienteActual != null){
+            if(clienteActual.getPin().equals(pin)){
+
+                m.setEstado("OK");
+                m.setEntidad(clienteActual);
+                return m;
+            }
+            else{
+
+                m.setEstado("NOK");
+                m.setMensaje("PIN incorrecto");
+                return m;
+            }
+
         }
         else{
-            return null;
+            m.setEstado("NOK");
+            m.setMensaje("Cliente no encontrado.");
+            return m;
         }
 
     }
+  /*  public static void main(String [] args){
+        Banco b = new Banco(null,null,null,null);
+
+        Cliente cli = new Cliente("1","a","1");
+        System.out.println(cli.getIdCliente());
+        Cliente cli2 = new Cliente("2","a2","2");
+        System.out.println(cli2.getIdCliente());
+        b.agregarCliente(cli);
+
+        Mensaje m = b.busquedaClienteId(cli.getIdCliente(),cli.getPin());
+        System.out.println(m.toString());
+    }*/
 }

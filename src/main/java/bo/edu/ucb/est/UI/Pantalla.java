@@ -12,7 +12,7 @@ public class Pantalla {
 
     //Valores que se solicitaran al cliente
     private List<String> inputString; //Etiquetas cuando el usuario elija una opcion
-    private List<String> dataType;
+    private List<String> dataType; //Tipo de dato que ingresara
     private List<Object> valores;
 
 
@@ -25,8 +25,8 @@ public class Pantalla {
         this.valores = new ArrayList();
     }
 
-    public void definirDatoEntrada(String mensaje, String tipoDato){
-        this.inputString.add(mensaje);
+    public void definirDatoEntrada( String tipoDato){
+
         this.dataType.add(tipoDato);
     }
     public void setContenido(List<String> contenidoPantalla){

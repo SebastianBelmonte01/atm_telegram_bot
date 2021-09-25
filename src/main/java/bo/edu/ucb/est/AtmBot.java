@@ -9,7 +9,6 @@ import java.util.List;
 
 public class AtmBot extends TelegramLongPollingBot {
 
-
     @Override
     public String getBotUsername() {
         return "atm_sebastian_bot";
@@ -32,11 +31,12 @@ public class AtmBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        System.out.println(update);
+        //System.out.println(update);
+        System.out.println(update.getMessage().getChatId().toString());
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message = new SendMessage();
-            message.setChatId(update.getMessage().getChatId().toString());  //Define a quien se mandara el mensaje
-            message.setText(update.getMessage().getText());
+            message.setChatId(update.getMessage().getChatId().toString());//Define a quien se mandara el mensaje
+            message.setText(update.getMessage().getText()); //El mensaje es guardado
 
             try {
                 execute(message); // Call method to send the message

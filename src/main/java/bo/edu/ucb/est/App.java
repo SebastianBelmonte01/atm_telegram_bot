@@ -7,17 +7,14 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
     {
         Banco BancoRex = new Banco("Banco Rex", "BR","18279301","Av. Jurasico");
 
-        Cliente jperez = new Cliente("0000","Juan Perez", "3333");
+        /*Cliente jperez = new Cliente("0000","Juan Perez", "3333");
         Cuenta cta1Jperez = new Cuenta("111122","BOB","Caja de ahorros",12000.0);
         jperez.agregarCuenta(cta1Jperez); // Se agrega una cuenta de Jperez
         Cuenta cta2Jperez = new Cuenta("112211","USD","Cuenta corriente",100.0);
@@ -33,7 +30,8 @@ public class App
         Cuenta cta2Carlos = new Cuenta("332211","USD","Cuenta corriente",1000.0);
         carlosGomez.agregarCuenta(cta2Carlos);
         Cuenta cta3Carlos = new Cuenta("332233","BOB","Caja ahorros",100000.0);
-        carlosGomez.agregarCuenta(cta3Carlos);
+        carlosGomez.agregarCuenta(cta3Carlos);*/
+
 
 
         try {
