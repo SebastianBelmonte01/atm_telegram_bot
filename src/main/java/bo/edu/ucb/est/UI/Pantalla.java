@@ -34,10 +34,11 @@ public class Pantalla {
 
     }
 
-    public String desplegarMenuOpciones(){
+    public String desplegar(){
         String mensajeBot = null;
         //Muestra un menu de opciones
         for(int i = 0; i < contenidoPantalla.size(); i++){
+            System.err.println(contenidoPantalla.get(i));
             mensajeBot = contenidoPantalla.get(i) + "\n";
         }
         return  mensajeBot;

@@ -68,30 +68,41 @@ public class Banco {
         this.clientes = clientes;
     }
 
-    public Mensaje busquedaClienteId(String idCliente, String pin){
+
+    public Mensaje busquedaClienteId(String idCliente) {
         Cliente clienteActual = clientes.get(idCliente); //Se obtiene el cliente mediante el id de telegram
         Mensaje m = new Mensaje();
-        if(clienteActual != null){
-            if(clienteActual.getPin().equals(pin)){
+        if (clienteActual != null) {
+                m.setEstado("OK");
+                m.setEntidad(clienteActual);
+                return m;
+        } else {
+            m.setEstado("NOK");
+            m.setMensaje("Cliente no encontrado.");
+            return m;
+        }
+    }
+    public Mensaje busquedaCliente(String idCliente, String pin) {
+        Cliente clienteActual = clientes.get(idCliente); //Se obtiene el cliente mediante el id de telegram
+        Mensaje m = new Mensaje();
+        if (clienteActual != null) {
+            if (clienteActual.getPin().equals(pin)) {
 
                 m.setEstado("OK");
                 m.setEntidad(clienteActual);
                 return m;
-            }
-            else{
+            } else {
 
                 m.setEstado("NOK");
                 m.setMensaje("PIN incorrecto");
                 return m;
             }
 
-        }
-        else{
+        } else {
             m.setEstado("NOK");
             m.setMensaje("Cliente no encontrado.");
             return m;
         }
-
     }
   /*  public static void main(String [] args){
         Banco b = new Banco(null,null,null,null);

@@ -4,6 +4,7 @@ import bo.edu.ucb.est.utilidades.Mensaje;
 import org.glassfish.grizzly.http.util.TimeStamp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Cuenta implements InterfaceOperaciones{
@@ -23,7 +24,7 @@ public class Cuenta implements InterfaceOperaciones{
         this.tipo = tipo;
         this.saldo = importe;
         this.operaciones = new ArrayList<>();
-        Operacion op = new Operacion(importe,new TimeStamp(),"AB"); //Importe inicial al crear la cuenta
+        Operacion op = new Operacion(importe,new Date(),"AB"); //Importe inicial al crear la cuenta
 
     }
 
@@ -71,7 +72,7 @@ public class Cuenta implements InterfaceOperaciones{
 
     @Override
     public void depositar(double importe) {
-        Operacion op = new Operacion(importe,new TimeStamp(),"AB"); //Importe inicial al crear la cuenta
+        Operacion op = new Operacion(importe,new Date(),"AB"); //Importe inicial al crear la cuenta
         operaciones.add(op);
         this.saldo += importe;
     }
@@ -80,7 +81,7 @@ public class Cuenta implements InterfaceOperaciones{
     public Mensaje retirar(double importe) {
         Mensaje mensaje = new Mensaje();
         if(saldo >= importe){
-            Operacion op = new Operacion(importe,new TimeStamp(),"DB"); //Importe inicial al crear la cuenta
+            Operacion op = new Operacion(importe,new Date(),"DB"); //Importe inicial al crear la cuenta
             operaciones.add(op);
             this.saldo -= importe;
             mensaje.setEstado("OK");
@@ -88,7 +89,6 @@ public class Cuenta implements InterfaceOperaciones{
             return mensaje;
         }
         else{
-
             mensaje.setEstado("NOK");
             mensaje.setMensaje("Saldo insuficiente. ");
             return mensaje;
@@ -106,7 +106,7 @@ public class Cuenta implements InterfaceOperaciones{
         return operaciones;
     }
 
-  /*  public static void main(String[] args){
+   public static void main(String[] args){
         Cliente mariaGomez = new Cliente("SUS","Maria Gomez","4444");
         Cuenta cta1Maria = new Cuenta("BOB", "Caja de ahorros", 1000.0);
         mariaGomez.agregarCuenta(cta1Maria);
@@ -122,7 +122,7 @@ public class Cuenta implements InterfaceOperaciones{
         //System.out.println(mariaGomez);
         System.out.println(cta1Maria.getOperaciones());
 
-    }*/
+    }
 
 
     @Override

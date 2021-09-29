@@ -2,21 +2,26 @@ package bo.edu.ucb.est.Modelo;
 
 import org.glassfish.grizzly.http.util.TimeStamp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class Operacion {
     private String idOperacion;
     private double importe;
-    private TimeStamp fechaHora; //Guarda la fecha y hora en yyyy-mm-dd hh:mm:ss
+    private Date fechaHora; //Guarda la fecha y hora en yyyy-mm-dd hh:mm:ss
     private String operacion; //Abono = AB o debito = DB
 
     private static int indice = 0;
 
-    public Operacion(double importe, TimeStamp fechaHora, String operacion) {
+    public static String formatoFecha( Date d) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(d);
+    }
+
+    public Operacion(double importe, Date fechaHora, String operacion) {
         this.idOperacion = "IDO"+(indice++);
         this.importe = importe;
         this.fechaHora = fechaHora;
-
         this.operacion = operacion;
     }
 
@@ -25,7 +30,7 @@ public class Operacion {
         return "Operacion{" +
                 "idOperacion='" + idOperacion + '\'' +
                 ", importe=" + importe +
-                ", fechaHora=" + fechaHora +
+                ", fechaHora=" + formatoFecha(fechaHora) +
                 ", operacion='" + operacion + '\'' +
                 '}';
     }

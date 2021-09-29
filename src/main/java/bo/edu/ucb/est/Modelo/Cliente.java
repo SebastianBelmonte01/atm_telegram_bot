@@ -50,14 +50,15 @@ public class Cliente extends Usuario{
      */
 
 
-
+    public void registrarNuevaCuenta(Cuenta cuenta){
+        cuentas.put(cuenta.getNumero(),cuenta);
+    }
 
     public void agregarCuenta(Cuenta cuenta){
         cuentas.put(cuenta.getNumero(),cuenta);
     }
 
-    public Mensaje busquedaCuentaId(String idCuenta){
-
+    public Mensaje bucarCuentaId(String idCuenta){
         Cuenta cuentaActual = cuentas.get(idCuenta);
         Mensaje m = new Mensaje();
         if(cuentaActual != null){
