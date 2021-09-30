@@ -119,6 +119,29 @@ public class AtmBot extends TelegramLongPollingBot {
 
         nodoRaiz.getNodosSiguientes().put(1, nodoVerificarPin);
 
+        Nodo nodoSeleccionarOpcion = new NodoSeleccionarOpcion("Elige una opción: \n 1. Ver Saldo. \n 2. Retirar dinero. \n 3. Depositar dinero. \n 4. Crear cuenta. \n 5. Salir.");
+        nodoVerificarPin.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
+        //Ver saldo
+        Nodo nodoDinamicoVerSaldo = new NodoMensajeDinamico("-");
+        nodoSeleccionarOpcion.getNodosSiguientes().put(0,nodoDinamicoVerSaldo);
+
+        //Realizar retiro
+        Nodo mensajeDinamicoRetiro = new NodoMensajeDinamicoMostrarCuentas(""); //Como retiro utiliza la misma seleccion de cuentas se reutiliza la clase NodoMensajeDinamicoMostrarCuentas
+        nodoSeleccionarOpcion.getNodosSiguientes().put(1,mensajeDinamicoRetiro);
+
+        Nodo nodoImporteRetiro = new NodoIngresarImporteRetiro("Ingrese el importe a retirar.");
+        mensajeDinamicoRetiro.getNodosSiguientes().put(0,nodoImporteRetiro);
+        nodoImporteRetiro.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
+        //Deposito
+        Nodo mensajeDinamicoDeposito = new NodoMensajeDinamicoMostrarCuentas("");
+        nodoSeleccionarOpcion.getNodosSiguientes().put(2,mensajeDinamicoDeposito);
+
+        Nodo nodoImporteDeposito = new NodoIngresarImporteDeposito("Ingrese el importe a depositar.");
+        mensajeDinamicoDeposito.getNodosSiguientes().put(0,nodoImporteDeposito);
+        nodoImporteDeposito.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
         return nodoRaiz;
     }
     public void iniciar(){

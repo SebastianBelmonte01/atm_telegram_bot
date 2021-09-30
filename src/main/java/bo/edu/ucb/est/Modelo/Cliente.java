@@ -58,7 +58,7 @@ public class Cliente extends Usuario{
         cuentas.put(cuenta.getNumero(),cuenta);
     }
 
-    public Mensaje bucarCuentaId(String idCuenta){
+    public Mensaje buscarCuentaId(String idCuenta){
         Cuenta cuentaActual = cuentas.get(idCuenta);
         Mensaje m = new Mensaje();
         if(cuentaActual != null){
