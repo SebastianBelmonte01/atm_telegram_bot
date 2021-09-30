@@ -15,7 +15,7 @@ public class Cuenta implements InterfaceOperaciones{
 
 
     private List<Operacion> operaciones;
-    private static int indice = 1000000;
+    private int indice = 0;
 
 
     public Cuenta(String moneda, String tipo, double importe) {
@@ -106,7 +106,7 @@ public class Cuenta implements InterfaceOperaciones{
         return operaciones;
     }
 
-   public static void main(String[] args){
+  /* public static void main(String[] args){
         Cliente mariaGomez = new Cliente("SUS","Maria Gomez","4444");
         Cuenta cta1Maria = new Cuenta("BOB", "Caja de ahorros", 1000.0);
         mariaGomez.agregarCuenta(cta1Maria);
@@ -122,7 +122,7 @@ public class Cuenta implements InterfaceOperaciones{
         //System.out.println(mariaGomez);
         System.out.println(cta1Maria.getOperaciones());
 
-    }
+    }*/
 
 
     @Override

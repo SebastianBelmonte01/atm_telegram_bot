@@ -16,12 +16,12 @@ public class NodoMensajeDinamico extends Nodo{
         String inputMessage = (String)parametros.get("inputMessage");
         HashMap mapaClientes = (HashMap)parametros.get("mapaClientes");
         Nodo nodoAnterior =  (Nodo)parametros.get("nodoAnterior");
-
         Cliente cliente = (Cliente) parametros.get("cliente");
         if (cliente == null) {
             return null; //Termina el flujo
         }
         if ("0".equals(inputMessage)) {
+            System.err.println("PRESIONASTE CERO");
             return this.getNodosSiguientes().get(0); // para que vuelva a NodoSeleccion
         }
         return null; // Analizar el caso para depositar y retirar

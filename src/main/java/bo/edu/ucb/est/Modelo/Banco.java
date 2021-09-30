@@ -104,16 +104,5 @@ public class Banco {
             return m;
         }
     }
-  /*  public static void main(String [] args){
-        Banco b = new Banco(null,null,null,null);
 
-        Cliente cli = new Cliente("1","a","1");
-        System.out.println(cli.getIdCliente());
-        Cliente cli2 = new Cliente("2","a2","2");
-        System.out.println(cli2.getIdCliente());
-        b.agregarCliente(cli);
-
-        Mensaje m = b.busquedaClienteId(cli.getIdCliente(),cli.getPin());
-        System.out.println(m.toString());
-    }*/
 }

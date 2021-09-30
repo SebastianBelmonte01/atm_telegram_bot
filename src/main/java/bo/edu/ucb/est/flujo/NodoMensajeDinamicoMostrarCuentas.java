@@ -14,11 +14,12 @@ public class NodoMensajeDinamicoMostrarCuentas extends Nodo{
 
     @Override
     public Nodo run(HashMap parametros) {
+
         String telegramId = (String)parametros.get("telegramId");
         String inputMessage = (String)parametros.get("inputMessage");
         HashMap mapaClientes = (HashMap)parametros.get("mapaClientes");
         Nodo nodoAnterior =  (Nodo)parametros.get("nodoAnterior");
-
+        System.err.println(inputMessage);
         Cliente cliente = (Cliente) parametros.get("cliente");
         if (cliente == null) {
             return null; //Termina el flujo

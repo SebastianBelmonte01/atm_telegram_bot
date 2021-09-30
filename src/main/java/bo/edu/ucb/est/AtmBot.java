@@ -26,7 +26,7 @@ public class AtmBot extends TelegramLongPollingBot {
 
     private Nodo nodoInicio;
 
-    private boolean modoPrueba= false;
+    private boolean modoPrueba= true;
 
     AtmBot(){
 
@@ -91,7 +91,6 @@ public class AtmBot extends TelegramLongPollingBot {
 
             String [] arrString = new String[2];
             arrString[0]=(nuevoProceso.getCliente()==null)?"":nuevoProceso.getCliente().getName();
-            arrString[1]="dos" ;
             message.setChatId(telegramId);//Define a quien se mandara el mensaje
             message.setText(nuevoProceso.getNodoActual().getMensaje(arrString)); //El mensaje es guardado
 
@@ -126,6 +125,8 @@ public class AtmBot extends TelegramLongPollingBot {
         Nodo nodoDinamicoVerSaldo = new NodoMensajeDinamico("-");
         nodoSeleccionarOpcion.getNodosSiguientes().put(0,nodoDinamicoVerSaldo);
 
+        nodoDinamicoVerSaldo.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
         //Realizar retiro
         Nodo mensajeDinamicoRetiro = new NodoMensajeDinamicoMostrarCuentas(""); //Como retiro utiliza la misma seleccion de cuentas se reutiliza la clase NodoMensajeDinamicoMostrarCuentas
         nodoSeleccionarOpcion.getNodosSiguientes().put(1,mensajeDinamicoRetiro);
@@ -141,6 +142,16 @@ public class AtmBot extends TelegramLongPollingBot {
         Nodo nodoImporteDeposito = new NodoIngresarImporteDeposito("Ingrese el importe a depositar.");
         mensajeDinamicoDeposito.getNodosSiguientes().put(0,nodoImporteDeposito);
         nodoImporteDeposito.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
+        //Crear nueva cuenta
+        Nodo nodoNuevaCuenta =  new NodoCrearNuevaCuenta("Elige una opción: \n 1. Caja de Ahorro en Bs. \n2. Caja de Ahorro en USD. \n3. Cuenta corriente en Bs. \n4. Cuenta corriente en USD." );
+        nodoSeleccionarOpcion.getNodosSiguientes().put(3,nodoNuevaCuenta);
+        nodoNuevaCuenta.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
+        //Salida
+
+        Nodo nodoSalida = new NodoSalida("Gracias por su preferencia vuelva pronto. ");
+        nodoSeleccionarOpcion.getNodosSiguientes().put(4,nodoSalida);
 
         return nodoRaiz;
     }

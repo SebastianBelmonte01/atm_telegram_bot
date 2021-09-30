@@ -27,6 +27,8 @@ public class NodoIngresarImporteDeposito extends Nodo{
         }
 
         double deposito = Double.parseDouble(inputMessage);
+        System.err.println("XDXD");
+        System.err.println(cuenta.getSaldo() + deposito);
         cuenta.setSaldo(cuenta.getSaldo()+deposito);
 
         return this.getNodosSiguientes().get(0);

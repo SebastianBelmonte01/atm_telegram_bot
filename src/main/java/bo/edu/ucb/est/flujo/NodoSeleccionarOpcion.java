@@ -47,6 +47,10 @@ public class NodoSeleccionarOpcion extends Nodo {
 
             return this.getNodosSiguientes().get(3);
         }
+        if("5".equals(inputMessage)){
+
+            return this.getNodosSiguientes().get(4);
+        }
 
 
         return null;
