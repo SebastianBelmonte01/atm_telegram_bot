@@ -19,13 +19,12 @@ public class NodoMensajeDinamicoMostrarCuentas extends Nodo{
         String inputMessage = (String)parametros.get("inputMessage");
         HashMap mapaClientes = (HashMap)parametros.get("mapaClientes");
         Nodo nodoAnterior =  (Nodo)parametros.get("nodoAnterior");
-        System.err.println(inputMessage);
         Cliente cliente = (Cliente) parametros.get("cliente");
         if (cliente == null) {
             return null; //Termina el flujo
         }
         if ("0".equals(inputMessage)) {
-            return this.getNodosSiguientes().get(0); // para que vuelva a NodoSeleccion
+            return nodoAnterior;//this.getNodosSiguientes().get(0); // para que vuelva a NodoSeleccion
         } else {
             int i = Integer.parseInt(inputMessage); //QQQ controlar excepcion
             int indice = 0;

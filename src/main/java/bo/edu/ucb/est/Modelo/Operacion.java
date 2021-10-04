@@ -19,11 +19,36 @@ public class Operacion {
     }
 
     public Operacion(double importe, Date fechaHora, String operacion) {
-        this.idOperacion = "IDO"+(indice++);
+        this.idOperacion = String.valueOf(indice++) ;
         this.importe = importe;
         this.fechaHora = fechaHora;
         this.operacion = operacion;
     }
+
+    public String getIdOperacion() {
+        return idOperacion;
+    }
+
+    public double getImporte() {
+        return importe;
+    }
+
+    public String getFechaHora() {
+        return formatoFecha(fechaHora) ;
+    }
+
+    public String getOperacion() {
+        if(this.operacion.equals("AB")){
+            return "Abono";
+        } else{
+            if(this.operacion.equals("DB")){
+                return "Debito";
+            }
+        }
+        return this.operacion;
+    }
+
+
 
     @Override
     public String toString() {

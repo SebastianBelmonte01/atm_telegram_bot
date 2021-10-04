@@ -3,7 +3,6 @@ package bo.edu.ucb.est;
 import bo.edu.ucb.est.Modelo.*;
 import bo.edu.ucb.est.flujo.*;
 import bo.edu.ucb.est.flujo.Proceso;
-import org.checkerframework.checker.units.qual.C;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -26,7 +25,7 @@ public class AtmBot extends TelegramLongPollingBot {
 
     private Nodo nodoInicio;
 
-    private boolean modoPrueba= true;
+    private boolean modoPrueba= false;
 
     AtmBot(){
 
@@ -75,10 +74,14 @@ public class AtmBot extends TelegramLongPollingBot {
             parametros.put("cliente",(proceso.getCliente()==null)?null:proceso.getCliente());
             parametros.put("nodoAnterior",(proceso.getNodoAnterior()==null)?null:proceso.getNodoAnterior());
             parametros.put("cuentaSeleccionada",proceso.getCuentaSeleccionada());
+            System.out.println(proceso.getNodoActual());
             Nodo nodoSiguiente = proceso.getNodoActual().run(parametros);
+            System.err.println(nodoSiguiente);
             if (nodoSiguiente == null) {
+                System.err.println("Saliendo");
                 this.eliminarProceso(telegramId);
             }
+
             Proceso nuevoProceso = new Proceso();
 
             nuevoProceso.setNodoActual(nodoSiguiente);
@@ -93,6 +96,13 @@ public class AtmBot extends TelegramLongPollingBot {
             arrString[0]=(nuevoProceso.getCliente()==null)?"":nuevoProceso.getCliente().getName();
             message.setChatId(telegramId);//Define a quien se mandara el mensaje
             message.setText(nuevoProceso.getNodoActual().getMensaje(arrString)); //El mensaje es guardado
+
+            if (nodoSiguiente == null) {
+                System.err.println("Saliendo x22");
+                this.eliminarProceso(telegramId);
+            }
+
+
 
             try {
                 execute(message); // Call method to send the message
@@ -118,7 +128,7 @@ public class AtmBot extends TelegramLongPollingBot {
 
         nodoRaiz.getNodosSiguientes().put(1, nodoVerificarPin);
 
-        Nodo nodoSeleccionarOpcion = new NodoSeleccionarOpcion("Elige una opción: \n 1. Ver Saldo. \n 2. Retirar dinero. \n 3. Depositar dinero. \n 4. Crear cuenta. \n 5. Salir.");
+        Nodo nodoSeleccionarOpcion = new NodoSeleccionarOpcion("Elige una opción: \n 1. Ver Saldo. \n 2. Retirar dinero. \n 3. Depositar dinero. \n 4. Crear cuenta. \n 5. Ver operaciones \n 6. Salir.");
         nodoVerificarPin.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
 
         //Ver saldo
@@ -148,10 +158,19 @@ public class AtmBot extends TelegramLongPollingBot {
         nodoSeleccionarOpcion.getNodosSiguientes().put(3,nodoNuevaCuenta);
         nodoNuevaCuenta.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
 
+        //Ver operaciones
+        Nodo mensajeDinamicoOperaciones = new NodoMensajeDinamicoMostrarOperacionesCuenta("");
+        nodoSeleccionarOpcion.getNodosSiguientes().put(4,mensajeDinamicoOperaciones);
+
+        Nodo mensajeDinamicoOperacionCuenta = new NodoMensajeDinamicoSiguiente("");
+        mensajeDinamicoOperaciones.getNodosSiguientes().put(0,mensajeDinamicoOperacionCuenta);
+        mensajeDinamicoOperacionCuenta.getNodosSiguientes().put(0,nodoSeleccionarOpcion);
+
         //Salida
 
         Nodo nodoSalida = new NodoSalida("Gracias por su preferencia vuelva pronto. ");
-        nodoSeleccionarOpcion.getNodosSiguientes().put(4,nodoSalida);
+        nodoSeleccionarOpcion.getNodosSiguientes().put(5,nodoSalida);
+       // nodoRaiz.getNodosSiguientes().put(1, nodoSeleccionarOpcion);
 
         return nodoRaiz;
     }

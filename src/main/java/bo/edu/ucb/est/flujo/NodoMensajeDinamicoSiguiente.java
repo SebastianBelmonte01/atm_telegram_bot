@@ -4,9 +4,9 @@ import bo.edu.ucb.est.Modelo.Cliente;
 
 import java.util.HashMap;
 
-public class NodoMensajeDinamico extends Nodo{
+public class NodoMensajeDinamicoSiguiente extends Nodo{
 
-    public NodoMensajeDinamico(String mensaje) {
+    public NodoMensajeDinamicoSiguiente(String mensaje) {
         super(mensaje);
     }
 
@@ -22,7 +22,7 @@ public class NodoMensajeDinamico extends Nodo{
         }
         if ("0".equals(inputMessage)) {
             System.err.println("PRESIONASTE CERO");
-            return nodoAnterior;//this.getNodosSiguientes().get(0); // TODO CAMBIO - para que vuelva a NodoSeleccion
+            return this.getNodosSiguientes().get(0); // Esta clase muestra el mensaje y va siempre al nodo siguiente
         }
         return null; // Analizar el caso para depositar y retirar
     }

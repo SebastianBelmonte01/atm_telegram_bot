@@ -14,7 +14,6 @@ public class Banco {
 
     /**
      * Métdo para agragar clientes en un banco dentro del mapa de tipo cliente
-     * @return
      */
     public void agregarCliente(Cliente cliente){
         this.clientes.put(cliente.getIdCliente(),cliente);

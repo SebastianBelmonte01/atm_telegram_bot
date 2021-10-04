@@ -8,6 +8,7 @@ public class NodoSalida extends Nodo{
     public NodoSalida(String mensaje) {
         super(mensaje);
     }
+    @Override
     public Nodo run(HashMap parametros){
         String telegramId = (String) parametros.get("telegramId");
         String inputMessage = (String)parametros.get("inputMessage");

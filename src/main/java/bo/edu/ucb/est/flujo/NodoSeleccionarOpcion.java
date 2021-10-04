@@ -47,9 +47,20 @@ public class NodoSeleccionarOpcion extends Nodo {
 
             return this.getNodosSiguientes().get(3);
         }
-        if("5".equals(inputMessage)){
-
+        if ("5".equals(inputMessage)) { // Opercaciones
+            String msg = "Seleccione una cuenta \n" + this.getSaldo(cliente);
+            if (msg==null) {
+                return null;
+            }
+            this.getNodosSiguientes().get(4).setMensaje(msg);
             return this.getNodosSiguientes().get(4);
+        }
+        if("6".equals(inputMessage)){ // Salida
+            String msg = "Gracias por su preferencia vuelva pronto";
+
+
+
+            return this.getNodosSiguientes().get(5);
         }
 
 
@@ -66,11 +77,12 @@ public class NodoSeleccionarOpcion extends Nodo {
             stringBuffer.append(cliente.getName()+ " no tienes cuentas, registra una cuenta.\n");
             stringBuffer.append("Presiona 0 para volver.");
         } else {
+            System.err.println("Tamaño: " + cuentas.size()); //TODO no se guardan multiples cuentas
             Iterator it = cuentas.values().iterator();
             int i=1;
             while (it.hasNext()) {
                 Cuenta cuenta=(Cuenta) it.next();
-                stringBuffer.append(i+" Cuenta:" + cuenta.getNumero() + "\n");
+                stringBuffer.append(i+". Cuenta:" + cuenta.getNumero() + "\n");
                 stringBuffer.append("       Moneda:" + cuenta.getMoneda()+ "\n");
                 stringBuffer.append("       Tipo:" + cuenta.getTipo()+ "\n");
                 stringBuffer.append("       Saldo:" + cuenta.getSaldo()+ "\n");
@@ -81,4 +93,5 @@ public class NodoSeleccionarOpcion extends Nodo {
         }
         return stringBuffer.toString();
     }
+
 }

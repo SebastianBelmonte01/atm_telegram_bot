@@ -28,7 +28,8 @@ public class NodoIngresarImporteRetiro extends Nodo{
 
         double deposito = Double.parseDouble(inputMessage);
         //TODO cuenta.retirar(deposito);
-        cuenta.setSaldo(cuenta.getSaldo()-deposito);
+        cuenta.retirar(deposito);
+        //cuenta.setSaldo(cuenta.getSaldo()-deposito);
 
         return this.getNodosSiguientes().get(0);
 

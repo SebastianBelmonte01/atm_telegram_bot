@@ -46,12 +46,12 @@ public class Cliente extends Usuario{
 
     /**
      * Método para agregar cuentas con un mapa mediante el número de cuenta
-     * @return
      */
 
 
     public void registrarNuevaCuenta(Cuenta cuenta){
-        cuentas.put(cuenta.getNumero(),cuenta);
+        System.out.println("NUEVA CUENTA CON NUMERO: " + cuenta.getIndice());
+        cuentas.put("IDCC"+cuenta.getIndice(),cuenta);
     }
 
     public void agregarCuenta(Cuenta cuenta){

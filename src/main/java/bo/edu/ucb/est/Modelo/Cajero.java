@@ -50,10 +50,9 @@ public class Cajero {
         Pantalla pantallaMenu = new Pantalla("Menú Principal");
         List menuContenido = new ArrayList();
         menuContenido.add("Bienvenido");
-        menuContenido.add("Elige una opción: \n1. Ver Saldo\n2. Retirar dinero.\n3. Depositar dinero\n4. Crear cuenta\n5. Salir");
+        menuContenido.add("Elige una opción: \n1. Ver Saldo\n2. Retirar dinero.\n3. Depositar dinero\n4. Crear cuenta\n5. Ver operaciones\n6. Salir");
         pantallaMenu.setContenido(menuContenido);
         pantallaMenu.definirDatoEntrada("Integer");
-        //TODO definir si retornar pantalla o lista
         return pantallaMenu;
 
     }

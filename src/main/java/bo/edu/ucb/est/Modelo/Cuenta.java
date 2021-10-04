@@ -15,20 +15,27 @@ public class Cuenta implements InterfaceOperaciones{
 
 
     private List<Operacion> operaciones;
-    private int indice = 0;
+    private static int indice = 0;
+
 
 
     public Cuenta(String moneda, String tipo, double importe) {
-        this.numero = "IDCC"+ (indice++);
+        this.numero = "IDCC"+ (++indice);
         this.moneda = moneda;
         this.tipo = tipo;
-        this.saldo = importe;
+            this.saldo = importe;
         this.operaciones = new ArrayList<>();
         Operacion op = new Operacion(importe,new Date(),"AB"); //Importe inicial al crear la cuenta
 
     }
 
+    public int getIndice() {
+        return this.indice;//(++indice);
+    }
 
+    public void setIndice(int indice) {
+        this.indice = indice;
+    }
 
     public String getNumero() {
         return numero;
