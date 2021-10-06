@@ -18,7 +18,7 @@ public class AtmBot extends TelegramLongPollingBot {
     private int estado = 0;
     private boolean flag = false;
     private  String nombre = null;
-    private static Banco BancoRex = new Banco("Banco Rex", "BR","18279301","Av. Jurasico");
+    private static Banco BancoRex = new Banco("Banco Rex \uD83E\uDD96", "BR","18279301","Av. Jurasico");
 
     private HashMap<String,List<Proceso>> mapaProcesosEjecucion = new HashMap<String,List<Proceso>>();
 
@@ -116,7 +116,7 @@ public class AtmBot extends TelegramLongPollingBot {
     private Nodo getNodoRaiz() {
         Nodo nodoRaiz = new NodoRaiz();
 
-        Nodo nodoRegistrarNombre = new NodoRegistrarNombre("Bienvenido!, he notado que aún no eres cliente, ¿cuál es tu nombre completo?");
+        Nodo nodoRegistrarNombre = new NodoRegistrarNombre("Bienvenido al "+ BancoRex.getNombre() +" !, he notado que aún no eres cliente, ¿cuál es tu nombre completo?");
 
         nodoRaiz.getNodosSiguientes().put(0, nodoRegistrarNombre);
 

@@ -78,16 +78,28 @@ public class Cuenta implements InterfaceOperaciones{
     }
 
     @Override
-    public void depositar(double importe) {
-        Operacion op = new Operacion(importe,new Date(),"AB"); //Importe inicial al crear la cuenta
-        operaciones.add(op);
-        this.saldo += importe;
+    public Mensaje depositar(double importe) {
+        Mensaje mensaje = new Mensaje();
+        if(importe > 0){
+            Operacion op = new Operacion(importe,new Date(),"AB"); //Importe inicial al crear la cuenta
+            operaciones.add(op);
+            this.saldo += importe;
+            mensaje.setEstado("OK");
+            mensaje.setMensaje("Operación realizada con exito. ");
+            return mensaje;
+        }
+        else{
+            mensaje.setEstado("NOK");
+            mensaje.setMensaje("No se pudo realizar la operación. ");
+            return mensaje;
+        }
+
     }
 
     @Override
     public Mensaje retirar(double importe) {
         Mensaje mensaje = new Mensaje();
-        if(saldo >= importe){
+        if(this.saldo >= importe){
             Operacion op = new Operacion(importe,new Date(),"DB"); //Importe inicial al crear la cuenta
             operaciones.add(op);
             this.saldo -= importe;

@@ -2,6 +2,7 @@ package bo.edu.ucb.est.flujo;
 
 import bo.edu.ucb.est.Modelo.Cliente;
 import bo.edu.ucb.est.Modelo.Cuenta;
+import bo.edu.ucb.est.utilidades.Mensaje;
 
 import java.util.HashMap;
 
@@ -29,12 +30,17 @@ public class NodoIngresarImporteDeposito extends Nodo{
         double deposito = Double.parseDouble(inputMessage);
         System.err.println("XDXD");
         System.err.println(cuenta.getSaldo() + deposito);
-        cuenta.depositar(deposito);
-        //  cuenta.setSaldo(cuenta.getSaldo()+deposito);
+        Mensaje mensaje = cuenta.depositar(deposito);
+        if(mensaje.getEstado().equals("OK")){
+            System.out.println("MMOMOMOMEOMEOEM");
+            return this.getNodosSiguientes().get(0);
+        }
+        else{
+            return nodoAnterior;
+        }
 
-        return this.getNodosSiguientes().get(0);
 
 
-        //return null; // Analizar el caso para depositar y retirar
+
     }
 }
